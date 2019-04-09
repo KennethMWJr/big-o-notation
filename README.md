@@ -86,13 +86,47 @@ features to help us characterize it.
 -   For loops, multiply the maximum number of times the loop can run by the complexity of the work inside the loop.
 -   Simplify: eliminate constant multiples within parentheses (`O(2n)` -> `O(n)`), constant multiples of a single big-o family (`8*O(n)` -> `O(n)`), and entire smaller terms (`O(n) + 3*O(1)` -> `O(n)`).  Don't remove smaller terms that use a different name for the input size: `O(n) + O(log(m))` doesn't simplify.
 
+#### Examples:
+
+Let's get the sum of two numbers.
+
+```javascript
+const sum = (a, b) => {
+  return a + b;
+}
+```
+
+<details>
+  <summary>What's the Big O?:</summary>
+O(1), because it always has the same (constant) runtime.
+</details>
+
+Let's log all the items in a nested array, and then log the index of each sub-array.
+
+```javascript
+const logNestedArray = nestedArray => {
+  for (let n = 0; n < nestedArray.length; n++) {
+    for (let m = 0; m < nestedArray[n].length; m++) {
+      console.log(array[n][m]);
+    }
+  }
+  for (let n = 0; n < nestedArray.length; n++) {
+    console.log(`${nestedArray[n]} is at index ${n}`);
+  }
+}
+```
+<details>
+  <summary>What's the Big O?:</summary>
+O(nm) + O(n), simplified as n
+</details>
+
 ### Orders of Magnitude: Turn and Talk!
 - Work with the person next to you and find the most significant magnitude for each:
-  1. 5x^3
-  2. 5x^2 + 2x^2 + 10
+  1. 5n^3
+  2. 5n^2 + 2n + 10
   3. 1000n
   4. 2n + 2
-  5. 10x^3 + 2x^2 + x + 125
+  5. 10n^3 + 2n^2 + n + 125
   6. 1 
   7. 10,000
 
@@ -154,11 +188,11 @@ const addAlltoAll = numArray => {
 
 #### O(log(n)) (logarithmic time)
 
-Any algorithm which cuts the problem size in half each at each step is logarithmic or `O(log n)`.
+Any algorithm which cuts the problem size in half each at each step is logarithmic or `O(log (n))`.
 
 These algorithms take longer for larger inputs, but the rate of increase is very slow compared to a lot of other possibilities.
 
-<details><summary>*Optional: Can you think of an example of an `O(log n)` algorithm?*</summary>
+<details><summary>*Optional: Can you think of an example of an `O(log (n))` algorithm?*</summary>
 
 An common example is finding an item in a sorted list with a balanced search tree or a binary search! Here's some pseudocode:
 
@@ -181,8 +215,6 @@ const binary_search = (array, value, low = 0, high = array.size - 1) => {
 
 </details>
 
-> Note: The base of a logarithm doesn't matter (as long as it doesn't depend on n) because it can be changed with a constant multiplier.
-
 #### O(n log(n))
 
 You'll usually see `O(n log(n))` in "divide and conquer" algorithms that cut a problem into halves, *solve both halves*, and combine the results into a final solution.  This `O(n log(n))` complexity is famous for being the fastest possible time complexity of sorting algorithms on unrestricted inputs.
@@ -191,38 +223,7 @@ Of course, this would also be the time complexity of a loop that ran `n` times a
 
 We'll be looking at this more once we get to __sorting functions__.
 
-#### O(2<sup>n</sup>)
-
-An O(2<sup>n</sup>) algorithm requires double the resources for each additional input. This is an example of exponential growth - and it gets out of hand very quickly.
-
-```javascript
-const fibonacci = num => {
-  if (num <= 1){
-    return num;
-  } else {
-    return fibonacci(num - 1) + fibonacci (num - 2);
-  }
-}
-```
-
-
-#### Combinations
-
-There are a few other common Big O families (notably `O(n!)`), but many problems are composed of combinations of the times we've looked at so far. For example, if a for loop has more complex operations inside it, time complexity is usually higher.
-
-```javascript
-const addAllArrays = arrayOfArrays => {
-  let sum = 1;
-  let oneArray;
-  for (let i = 0; i < arrayOfArrays.length; i++){
-    oneArray = arrayOfArrays[i];
-    for (let j = 0; j < oneArray.length; j++){
-      sum += numArray[j];
-    }
-  }
-  return sum;
-}
-```
+#### [There are other families too!](https://en.wikipedia.org/wiki/Big_O_notation#Orders_of_common_functions)
 
 ## Exercises!
 Work with your partner and find the worst case time-complexity of each of these algorithms:
