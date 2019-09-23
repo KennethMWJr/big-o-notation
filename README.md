@@ -86,6 +86,17 @@ features to help us characterize it.
 -   For loops, multiply the maximum number of times the loop can run by the complexity of the work inside the loop.
 -   Simplify: eliminate constant multiples within parentheses (`O(2n)` -> `O(n)`), constant multiples of a single big-o family (`8*O(n)` -> `O(n)`), and entire smaller terms (`O(n) + 3*O(1)` -> `O(n)`).  Don't remove smaller terms that use a different name for the input size: `O(n) + O(log(m))` doesn't simplify.
 
+#### Basic Data Structures Operations:
+
+```
+                       Accessing    Searching    Inserting    Deleting
+ -------------------------------------------------------------------------
+             Array     O(1)         O(N)         O(N)         O(N)
+       Linked List     O(N)         O(N)         O(1)         O(1)
+Binary Search Tree     O(log N)     O(log N)     O(log N)     O(log N)
+    Hash Table/Set     O(1)         O(N)         O(1)         O(1)
+```
+
 #### Examples:
 
 Let's get the sum of two numbers.
